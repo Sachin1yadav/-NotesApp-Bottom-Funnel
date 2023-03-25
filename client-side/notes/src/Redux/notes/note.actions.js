@@ -19,15 +19,15 @@ import {
 } from "./note.types";
 const token = JSON.parse(localStorage.getItem("token"));
 
-export const getNotes = (gt) => async (dispatch) => {
+export const getNotes = ( ) => async (dispatch) => {
   dispatch({ type: GET_NOTES_LOADING });
   try {
     const res = await axios.get(
       "https://lively-bear-galoshes.cyclic.app/notes",
       {
         headers: {
-          "Content-type": "application/json",
-          Authorization: gt,
+         
+          Authorization: token,
         },
       }
     );
