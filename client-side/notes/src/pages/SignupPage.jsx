@@ -16,8 +16,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../constants/config";
-import { getUser } from "../Redux/users/user.actions";
+ import { getUser } from "../Redux/users/user.actions";
 import Loadingpage from "./Loadingpage";
 
 export default function SignupPage() {

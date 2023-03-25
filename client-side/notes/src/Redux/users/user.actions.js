@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getNotes } from "../notes/note.actions";
 
 import {
   LOGIN_USER_ERROR,
@@ -21,6 +22,7 @@ export const getUser = (obj) => async (dispatch) => {
     let { token } = data.data;
     if (token) {
       dispatch({ type: LOGIN_USER_SUCCESS, payload: token });
+      dispatch(getNotes())
     } else {
       alert("somting went wrong");
       dispatch({ type: LOGIN_USER_ERROR });
@@ -30,7 +32,6 @@ export const getUser = (obj) => async (dispatch) => {
   }
 };
 
-
-export const userLogout=()=>(dispatch)=>{
-  dispatch({type:LOGOUT})
-}
+export const userLogout = () => (dispatch) => {
+  dispatch({ type: LOGOUT });
+};

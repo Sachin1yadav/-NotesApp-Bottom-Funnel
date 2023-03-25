@@ -27,27 +27,32 @@ export default function NotesPage() {
   const dispatch = useDispatch();
   const { loading, error, data } = useSelector((state) => state.noteReducer);
 
-  console.log(data);
-const {token}=useSelector((state)=>state.userReducer)
-console.log("token",token)
-  const [notes, setNotes] = useState([]);
+  const { token } = useSelector((state) => state.userReducer);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [notes, setNotes] = useState([]);
 
   const initialRef = useRef(null);
   const finalRef = useRef(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  useEffect(() => {
+    dispatch(getNotes());
+  }, []);
+
+  useEffect(() => {
+    setNotes(data);
+  }, [data]);
+console.log("data",data)
   const createNote = () => {
     dispatch(createNotes({ title, description }));
     onClose();
   };
 
-  useEffect(() => {
-    dispatch(getNotes());
-    
-  }, [ ]);
+  
 
+   
   if (loading) {
     return <Loadingpage />;
   } else {
@@ -59,7 +64,7 @@ console.log("token",token)
           margin={"auto"}
           gridTemplateColumns="repeat(4 ,1fr)"
         >
-          {data?.map((el, i) => (
+          {notes?.map((el, i) => (
             <NoteCard key={i} {...el} />
           ))}
         </Grid>
@@ -107,12 +112,7 @@ console.log("token",token)
               </ModalBody>
 
               <ModalFooter>
-                <Button
-               
-                  colorScheme="blue"
-                  mr={3}
-                  onClick={createNote}
-                >
+                <Button colorScheme="blue" mr={3} onClick={createNote}>
                   Create
                 </Button>
                 <Button onClick={onClose}>Cancel</Button>

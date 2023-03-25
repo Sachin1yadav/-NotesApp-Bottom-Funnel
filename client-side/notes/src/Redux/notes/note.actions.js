@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { BASE_URL } from "../../constants/config";
-import { store } from "../store";
+ import { store } from "../store";
 import { LOGOUT } from "../users/user.types";
 import {
   CREATE_NOTES_ERROR,
@@ -19,7 +18,7 @@ import {
 } from "./note.types";
 const token = JSON.parse(localStorage.getItem("token"));
 
-export const getNotes = ( ) => async (dispatch) => {
+export const getNotes = () => async (dispatch) => {
   dispatch({ type: GET_NOTES_LOADING });
   try {
     const res = await axios.get(
@@ -75,8 +74,7 @@ export const deleteNotes = (id) => async (dispatch) => {
     const res = await axios.delete(
       `https://lively-bear-galoshes.cyclic.app/notes/delete/${id}`,
       {
-        //   // method: "delete",
-        headers: {
+         headers: {
           Authorization: token,
         },
       }
